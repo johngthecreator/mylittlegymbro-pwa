@@ -2,13 +2,14 @@
 version: alpha
 name: Pinterest-design-analysis
 description: |
-  A photography-first discovery system organized around the Pinterest Red CTA, the masonry pin grid, and a soft warm-cream chrome that gets out of the imagery's way. The home page is a content-discovery tool wearing the chrome of a magazine publisher: 70px display headlines, friendly Pin Sans typography, fully-rounded pill buttons (16px) on a cream-tinted neutral palette, and a sticky red "Sign up" CTA that anchors every viewport. Pin imagery is the system's load-bearing visual element — square, portrait, and landscape pins tile in a column-based masonry grid where each tile is a fully-rounded 16px-radius card, separated by tight 8px gutters. The chrome is otherwise quiet: warm grays, true whites, and a single saturated red — no decorative gradients, no atmospheric backgrounds, no shadows beyond a soft modal scrim.
+  A photography-first discovery system organized around the brand purple CTA, the masonry pin grid, and a soft warm-cream chrome that gets out of the imagery's way. The home page is a content-discovery tool wearing the chrome of a magazine publisher: 70px display headlines, friendly Pin Sans typography, fully-rounded pill buttons (16px) on a cream-tinted neutral palette, and a sticky purple "Sign up" CTA that anchors every viewport. Pin imagery is the system's load-bearing visual element — square, portrait, and landscape pins tile in a column-based masonry grid where each tile is a fully-rounded 16px-radius card, separated by tight 8px gutters. The chrome is otherwise quiet: warm grays, true whites, and a single saturated purple — no decorative gradients, no atmospheric backgrounds, no shadows beyond a soft modal scrim.
 
 colors:
-  primary: "#e60023"
+  primary: "#3100e0"
   on-primary: "#ffffff"
-  primary-pressed: "#cc001f"
-  ink: "#000000"
+  primary-pressed: "#2700b8"
+  primary-bright: "#6a45ff"
+  ink: "#211922"
   ink-soft: "#211922"
   body: "#33332e"
   charcoal: "#262622"
@@ -27,11 +28,9 @@ colors:
   on-dark: "#ffffff"
   on-dark-mute: "rgba(255,255,255,0.7)"
   surface-dark: "#262622"
-  focus-outer: "#435ee5"
+  surface-dark-elevated: "#2a2a26"
+  focus-outer: "#3100e0"
   focus-inner: "#ffffff"
-  accent-pressed-blue: "#617bff"
-  accent-purple: "#7e238b"
-  accent-purple-deep: "#6845ab"
   success-deep: "#103c25"
   success-pale: "#c7f0da"
   error: "#9e0a0a"
@@ -283,19 +282,24 @@ components:
 
 ## Overview
 
-Pinterest's marketing system is built around a single instructional principle: get out of the photograph's way. The chrome is a quiet warm-cream neutral palette (`{colors.surface-soft}`, `{colors.surface-card}`, `{colors.canvas}`) carrying typography in Pinterest's proprietary Pin Sans face, with Pinterest Red (`{colors.primary}` — `#e60023`) reserved exclusively for the "Sign up" CTA, the active-tab indicator, and the sticky top-nav anchor. Every other surface is allowed to fade behind the imagery — pin tiles, category tiles, content thumbnails, profile shots — that constitutes the actual product.
+> **Adapted for MyLittleGymBro.** This is a Pinterest-style design reference that
+> has been re-skinned to MyLittleGymBro's palette. The single saturated accent is
+> brand purple (`{colors.primary}` — `#3100e0`), not Pinterest red; surfaces,
+> typography, and radius rules are otherwise unchanged.
 
-The design system has two distinct surface modes that alternate down the home page: the **hero/CTA chrome** (cream surfaces, large 70px Pin Sans display headlines, alternating left/right photo-illustrated feature cards) and the **content masonry** (a column-based grid of 16px-radius pin cards on `{colors.surface-card}` with no internal padding — the pin is the card). The search results page is almost pure masonry: a tight column grid of pin imagery in mixed aspect ratios, with a small filter-chip strip at the top and the sticky red Sign-up CTA in the upper-right corner. The `create.pinterest.com` business surface inverts the grid back to a more traditional editorial layout but keeps every other rule of the system: Pin Sans, cream chrome, red CTA, 16px-radius pills.
+Pinterest's marketing system is built around a single instructional principle: get out of the photograph's way. The chrome is a quiet warm-cream neutral palette (`{colors.surface-soft}`, `{colors.surface-card}`, `{colors.canvas}`) carrying typography in Pinterest's proprietary Pin Sans face, with brand purple (`{colors.primary}` — `#3100e0`) reserved exclusively for the "Sign up" CTA, the active-tab indicator, and the sticky top-nav anchor. Every other surface is allowed to fade behind the imagery — pin tiles, category tiles, content thumbnails, profile shots — that constitutes the actual product.
+
+The design system has two distinct surface modes that alternate down the home page: the **hero/CTA chrome** (cream surfaces, large 70px Pin Sans display headlines, alternating left/right photo-illustrated feature cards) and the **content masonry** (a column-based grid of 16px-radius pin cards on `{colors.surface-card}` with no internal padding — the pin is the card). The search results page is almost pure masonry: a tight column grid of pin imagery in mixed aspect ratios, with a small filter-chip strip at the top and the sticky purple Sign-up CTA in the upper-right corner. The `create.pinterest.com` business surface inverts the grid back to a more traditional editorial layout but keeps every other rule of the system: Pin Sans, cream chrome, purple CTA, 16px-radius pills.
 
 The system's signature gesture is **shape geometry**: 16px radius (`{rounded.md}`) for nearly every surface — buttons, inputs, pin cards, feature cards — and 32px radius (`{rounded.lg}`) reserved for pin-card-large and modal cards. There are exactly three radius values in active use: 16px, 32px, and pill (9999px). The system never goes flat (sharp corners) and never goes radius-medium — those two values are the entire shape vocabulary.
 
 **Key Characteristics:**
-- Single-accent CTA: Pinterest Red (`{colors.primary}`) carries every primary action; everything else is monochrome
+- Single-accent CTA: brand purple (`{colors.primary}`) carries every primary action; everything else is monochrome
 - Pin Sans proprietary typography across every text role from `{typography.display-xl}` (70px) down to `{typography.caption-sm}` (12px) — no serif, no monospace anywhere
 - Two-radius shape system: `{rounded.md}` (16px) for most components, `{rounded.lg}` (32px) for large cards and modals, `{rounded.full}` for circular elements
 - Masonry pin grid as the load-bearing visual element — column-based layout where each pin's natural aspect ratio is preserved
 - Warm-cream neutral chrome (`{colors.surface-card}` — #f6f6f3) that softly recedes behind imagery without competing
-- Sticky top nav with the always-red Sign-up CTA anchored in the upper-right at every breakpoint
+- Sticky top nav with the always-purple Sign-up CTA anchored in the upper-right at every breakpoint
 - Modal overlay (login/signup) using a soft scrim over the page content rather than a navigation jump
 
 ## Colors
@@ -303,8 +307,8 @@ The system's signature gesture is **shape geometry**: 16px radius (`{rounded.md}
 > **Source pages:** `/` (home), `/search/pins/?q=bold lip` (search results), `create.pinterest.com/` (creator marketing), `create.pinterest.com/product-features/how-to-create-boards/` (creator article). The chrome palette is identical across all four pages.
 
 ### Brand & Accent
-- **Pinterest Red** (`{colors.primary}` — `#e60023`): the brand's only highly-saturated color. Sign-up CTAs, sticky top-nav anchor, active state in tab strips, and the brand wordmark.
-- **Pinterest Red Pressed** (`{colors.primary-pressed}` — `#cc001f`): pressed state for the primary button — a single notch deeper than brand red.
+- **brand purple** (`{colors.primary}` — `#3100e0`): the brand's only highly-saturated color. Sign-up CTAs, sticky top-nav anchor, active state in tab strips, and the brand wordmark.
+- **brand purple Pressed** (`{colors.primary-pressed}` — `#2700b8`): pressed state for the primary button — a single notch deeper than brand purple.
 
 ### Surface
 - **Canvas** (`{colors.canvas}` — `#ffffff`): true white. The base surface for the primary nav, modals, feature cards, and content body.
@@ -318,7 +322,7 @@ The system's signature gesture is **shape geometry**: 16px radius (`{rounded.md}
 
 ### Text
 - **Ink** (`{colors.ink}` — `#000000`): primary headlines, button text, primary nav links.
-- **Ink Soft** (`{colors.ink-soft}` — `#211922`): inline-link color in body prose. The brand's only "color" beyond Pinterest Red used in chrome — a near-black with a faint warm cast.
+- **Ink Soft** (`{colors.ink-soft}` — `#211922`): inline-link color in body prose. The brand's only "color" beyond brand purple used in chrome — a near-black with a faint warm cast.
 - **Body** (`{colors.body}` — `#33332e`): default paragraph text on `{colors.canvas}`.
 - **Charcoal** (`{colors.charcoal}` — `#262622`): subtly softer body where pure ink is too heavy.
 - **Mute** (`{colors.mute}` — `#62625b`): metadata text, footer links, secondary captions.
@@ -328,16 +332,15 @@ The system's signature gesture is **shape geometry**: 16px radius (`{rounded.md}
 
 ### Semantic
 - **Error** (`{colors.error}` — `#9e0a0a`): validation messages, destructive confirmation copy.
-- **Error Deep** (`{colors.error-deep}` — `#cc001f`): deepened error background where the regular error tone needs more contrast. Note: this matches the primary-pressed value but in error context represents semantic destructiveness.
+- **Error Deep** (`{colors.error-deep}` — `#cc001f`): deepened error background where the regular error tone needs more contrast.
 - **Success Deep** (`{colors.success-deep}` — `#103c25`): in-product success messaging.
 - **Success Pale** (`{colors.success-pale}` — `#c7f0da`): pale success-pill background.
-- **Focus Outer** (`{colors.focus-outer}` — `#435ee5`): the system's focus-ring blue — appears as a 2px outer outline around focused inputs and buttons.
+- **Focus Outer** (`{colors.focus-outer}` — `#3100e0`): the system's focus-ring purple — appears as a 2px outer outline around focused inputs and buttons.
 - **Focus Inner** (`{colors.focus-inner}` — `#ffffff`): white inner gap inside the focus-ring stack.
 
-### Editorial Accents (used sparingly inside content imagery and category badges)
-- **Accent Pressed Blue** (`{colors.accent-pressed-blue}` — `#617bff`): pressed state for blue informational badges and editorial pin chips.
-- **Accent Purple** (`{colors.accent-purple}` — `#7e238b`): editorial recommendation badge, in-product "Pinterest Predicts" callout.
-- **Accent Purple Deep** (`{colors.accent-purple-deep}` — `#6845ab`): paired dark for purple lockups and "Performance+" iconography.
+### Editorial Accents (used sparingly in landing gradient tiles and category badges)
+- **Primary Bright** (`{colors.primary-bright}` — `#6a45ff`): the lighter end of the brand gradient used on landing bento tiles and hero imagery.
+- **Accent Purple Deep** (`{colors.accent-purple-deep}` — `#6845ab`): paired dark for purple lockups and editorial callouts.
 
 ## Typography
 
@@ -430,13 +433,13 @@ The radius vocabulary is essentially three values: 16px for most things, 32px fo
 ### Buttons
 
 **`button-primary`** — the universal Pinterest CTA
-- Background `{colors.primary}` (Pinterest Red), text `{colors.on-primary}`, type `{typography.button-md}`, padding `6px 14px`, height ~40px, rounded `{rounded.md}` (16px).
+- Background `{colors.primary}` (brand purple), text `{colors.on-primary}`, type `{typography.button-md}`, padding `6px 14px`, height ~40px, rounded `{rounded.md}` (16px).
 - Used for "Sign up", "Join Pinterest for free", "Get started" — every primary action across every surface in the system.
-- Pressed state lives in `button-primary-pressed` — background drops to `{colors.primary-pressed}` (`#cc001f`).
+- Pressed state lives in `button-primary-pressed` — background drops to `{colors.primary-pressed}` (`#2700b8`).
 
 **`button-secondary`** — gray-cream alternative
 - Background `{colors.secondary-bg}` (`#e5e5e0`), text `{colors.on-secondary}`, type `{typography.button-md}`, padding `6px 14px`, height ~40px, rounded `{rounded.md}`.
-- "I already have an account", "Continue", "Cancel" — second-tier actions paired with the red primary.
+- "I already have an account", "Continue", "Cancel" — second-tier actions paired with the purple primary.
 - Pressed state lives in `button-secondary-pressed` — background drops to `{colors.secondary-pressed}`.
 
 **`button-tertiary`** — ghost link
@@ -491,7 +494,7 @@ The radius vocabulary is essentially three values: 16px for most things, 32px fo
 - 3- or 4-up grid of small category thumbnails inside the home-page "Bring your favorite ideas to life" section. Each tile contains a category icon or composition photograph + a short label in `{typography.body-strong}`.
 
 **`feature-card`** + **`feature-card-soft`**
-- Standard: background `{colors.canvas}`, rounded `{rounded.md}`, padding 32px. Pairs a 4:5 portrait pin image (left or right) with a `{typography.heading-xl}` headline + body copy + `{component.button-primary}` red CTA.
+- Standard: background `{colors.canvas}`, rounded `{rounded.md}`, padding 32px. Pairs a 4:5 portrait pin image (left or right) with a `{typography.heading-xl}` headline + body copy + `{component.button-primary}` purple CTA.
 - Soft: background `{colors.surface-card}` for the alternating-row variant where the cream surface is needed to break up content.
 
 **`modal-card`** — login/signup overlay
@@ -501,14 +504,14 @@ The radius vocabulary is essentially three values: 16px for most things, 32px fo
 
 **`hero-cta-strip`** — dark CTA strip on `create.pinterest.com`
 - Background `{colors.surface-dark}`, text `{colors.on-dark}`, type `{typography.heading-xl}`, padding `48px 32px`, rounded `{rounded.none}`.
-- Sits at the top of the creator marketing page with a single `{component.button-primary}` red CTA on the right.
+- Sits at the top of the creator marketing page with a single `{component.button-primary}` purple CTA on the right.
 
 ### Navigation
 
 **`primary-nav`**
 - Background `{colors.canvas}`, text `{colors.ink}`, height ~64px, type `{typography.body-strong}`, rounded `{rounded.none}`, with a 1px `{colors.hairline}` bottom rule on inner pages (no rule on the home hero).
-- Layout (desktop home): Pinterest red wordmark at left + "Explore" link, centered `{component.search-bar}`, right cluster ("About / Businesses / Create / Log in" + the always-red `{component.button-primary}` "Sign up" CTA).
-- Layout (search results): Pinterest red P-logo at left, centered search bar with the active query, right cluster ("Log in" + red Sign-up button).
+- Layout (desktop home): brand purple wordmark at left + "Explore" link, centered `{component.search-bar}`, right cluster ("About / Businesses / Create / Log in" + the always-purple `{component.button-primary}` "Sign up" CTA).
+- Layout (search results): brand purple P-logo at left, centered search bar with the active query, right cluster ("Log in" + purple Sign-up button).
 
 **Top Nav (Mobile)**
 - Hamburger menu icon at left, P-logo at center, search-glyph + Sign-up CTA at right. Search bar collapses into the magnifier icon and expands to full-width when tapped.
@@ -518,17 +521,17 @@ The radius vocabulary is essentially three values: 16px for most things, 32px fo
 **`footer-section`**
 - Background `{colors.canvas}`, text `{colors.mute}` in `{typography.body-sm}`, padding `32px 24px`, rounded `{rounded.none}`, with a 1px `{colors.hairline}` top rule.
 - Layout: 4-column link grid (Get the app — iOS / Android · Quick Links — Explore / Shop / Users / Collections / Shopping · Pinterest for · About — Privacy / Terms / Help Center) with column headers in `{typography.body-sm-strong}` and link lists in `{typography.body-sm}` `{colors.mute}`.
-- Bottom row: Pinterest red wordmark + "© 2026 Pinterest" in `{typography.caption-sm}` `{colors.mute}`.
+- Bottom row: brand purple wordmark + "© 2026 MyLittleGymBro" in `{typography.caption-sm}` `{colors.mute}`.
 
 ### Inline
 
 **`link-inline`** — body-prose anchor link
-- `{colors.ink-soft}` text with no underline by default. Pinterest's only "color" beyond brand red on chrome — a near-black warm tint used inline to differentiate links from body without color contrast.
+- `{colors.ink-soft}` text with no underline by default. Pinterest's only "color" beyond brand purple on chrome — a near-black warm tint used inline to differentiate links from body without color contrast.
 
 ## Do's and Don'ts
 
 ### Do
-- Reserve `{colors.primary}` (Pinterest Red) for primary CTAs, the active-tab indicator, and the brand wordmark only. It is never decorative.
+- Reserve `{colors.primary}` (brand purple) for primary CTAs, the active-tab indicator, and the brand wordmark only. It is never decorative.
 - Use `{rounded.md}` (16px) on every interactive element and standard card; reserve `{rounded.lg}` (32px) for large pin cards and modals; reserve `{rounded.full}` for circular elements (search bar, chips, avatars).
 - Stage every pin image inside a `{component.pin-card}` with no internal padding — the photograph IS the card.
 - Stack content sections at `{spacing.section}` (64px) rhythm; tighten pin grids to `{spacing.sm}` (8px) gutters so imagery effectively touches.
@@ -540,7 +543,7 @@ The radius vocabulary is essentially three values: 16px for most things, 32px fo
 - Don't use sharp-cornered buttons or cards. There are no `{rounded.none}` interactive elements in the system.
 - Don't introduce drop shadows on cards. The only shadow in the system is the 16px ambient under `{component.modal-card}`.
 - Don't pad `{component.pin-card}` internally. The image is full-bleed; metadata sits over the image as an overlay pill, not below it.
-- Don't replace `{colors.primary}` with another red. The brand red is precise — `#e60023`.
+- Don't replace `{colors.primary}` with another purple. The brand purple is precise — `#3100e0`.
 - Don't use `{colors.ink-soft}` (the body-prose link tint) outside of inline body anchor links. It is not a chrome color.
 - Don't introduce a third radius value between 16px and 32px. The system jumps directly from md to lg with nothing in between.
 
@@ -562,7 +565,7 @@ The radius vocabulary is essentially three values: 16px for most things, 32px fo
 All interactive elements meet WCAG AA (≥ 44×44px). `{component.button-primary}` and `{component.button-secondary}` sit at ~40px height with 14px horizontal padding (effective ~40×80px tappable). `{component.search-bar}` sits at 48px. `{component.text-input}` sits at 44px. `{component.filter-chip}` is ~36–40px height with 16px padding — extends to 44px tappable via inline padding. `{component.button-icon-circular}` is exactly 40×40 with extended hit-target padding to 48×48 inside the parent.
 
 ### Collapsing Strategy
-- **Primary nav:** desktop horizontal cluster → tablet hamburger drawer at 768px. The red Sign-up CTA stays visible at every breakpoint.
+- **Primary nav:** desktop horizontal cluster → tablet hamburger drawer at 768px. The purple Sign-up CTA stays visible at every breakpoint.
 - **Search bar:** desktop centered (~480px wide) → tablet compressed (~320px) → mobile collapses to a magnifier icon that expands to a full-width overlay on tap.
 - **Pin masonry grid:** 5/6-up → 4-up → 3-up → 2-up → 1-up at 1920, 1024, 768, and 480px. Gutters drop from 8px to 6px on mobile.
 - **Home feature row:** desktop alternating left/right 2-column → tablet vertical stack with text above image → mobile single-column with full-bleed image.
@@ -584,7 +587,7 @@ All interactive elements meet WCAG AA (≥ 44×44px). `{component.button-primary
 3. Run `npx @google/design.md lint DESIGN.md` after edits — `broken-ref`, `contrast-ratio`, and `orphaned-tokens` warnings flag issues automatically.
 4. Add new variants as separate component entries (`-pressed`, `-disabled`, `-focused`) — do not bury them inside prose.
 5. Default body to `{typography.body-md}`; reach for `{typography.body-strong}` for emphasis; reserve `{typography.display-xl}` strictly for top-of-page hero headlines.
-6. Keep `{colors.primary}` scarce — at most one Pinterest-red CTA per fold (counting nav, hero, and feature-card CTAs together).
+6. Keep `{colors.primary}` scarce — at most one brand-purple CTA per fold (counting nav, hero, and feature-card CTAs together).
 7. When introducing a new component, ask whether it can be expressed with the existing pin-card + 16px-radius + cream-surface vocabulary before adding new tokens. The system's strength is that it almost never needs new ones.
 
 ## Known Gaps

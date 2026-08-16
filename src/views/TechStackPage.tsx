@@ -1,6 +1,8 @@
 import type { ReactElement } from "react";
 import { ArrowLeft, Database, HandCoins, Lock, Rocket, Sparkles } from "lucide-react";
-import { Button } from "@/components/ui/button";
+
+const mono = "font-['IBM_Plex_Mono']";
+const display = "font-['Archivo']";
 
 const STACK = [
   {
@@ -45,51 +47,73 @@ function Card({
   body: string;
 }) {
   return (
-    <div className="rounded-2xl bg-muted p-5">
-      <Icon className="size-6 text-primary" />
-      <h3 className="mt-3 text-base font-bold">{title}</h3>
-      <p className="mt-1 text-sm leading-relaxed text-muted-foreground">{body}</p>
+    <div className="border-t-2 border-black p-4">
+      <Icon className="size-5" />
+      <h3 className={`mt-3 ${display} text-sm font-black uppercase tracking-[0.02em]`}>
+        {title}
+      </h3>
+      <p className="mt-2 text-xs leading-[1.8] text-black/55">{body}</p>
     </div>
+  );
+}
+
+function Section({
+  title,
+  children,
+}: {
+  title: string;
+  children: React.ReactNode;
+}) {
+  return (
+    <section className="space-y-4">
+      <h2
+        className={`${display} text-xl font-black uppercase tracking-[0.02em]`}
+      >
+        {title}
+      </h2>
+      {children}
+    </section>
   );
 }
 
 export default function TechStackPage(): ReactElement {
   return (
-    <div className="mx-auto w-full max-w-2xl px-4 py-8">
-      <div className="mb-6 flex items-center gap-3">
-        <Button
-          variant="ghost"
-          size="icon"
+    <div
+      className={`mx-auto w-full max-w-[1600px] px-4 py-8 ${mono} text-[0.875rem] leading-[1.8] tracking-[0.06rem]`}
+    >
+      <div className="mb-8 flex items-center gap-3">
+        <button
+          type="button"
           onClick={() => history.back()}
           aria-label="Back"
+          className="flex size-10 items-center justify-center border border-black transition hover:bg-black hover:text-white"
         >
-          <ArrowLeft />
-        </Button>
-        <h1 className="text-2xl font-bold tracking-tight">Tech stack</h1>
+          <ArrowLeft className="size-4" />
+        </button>
+        <h1 className={`${display} text-2xl font-black uppercase tracking-[0.02em]`}>
+          Tech stack
+        </h1>
       </div>
 
-      <div className="space-y-8">
-        <section className="space-y-3">
-          <h2 className="text-xl font-bold tracking-tight">
-            Local-first by design
-          </h2>
-          <div className="space-y-3 text-sm leading-relaxed text-muted-foreground">
+      <div className="space-y-12">
+        <Section title="Local-first by design">
+          <div className="space-y-4 text-black/55">
             <p>
               MyLittleGymBro is built as a{" "}
-              <strong className="text-foreground">progressive web app</strong>{" "}
-              that runs entirely in your browser. There is no account, no
-              backend server, and no cloud database. Your food library, daily
-              logs, and recipes are stored locally on your device with Dexie on
-              top of IndexedDB.
+              <strong className="text-black">progressive web app</strong> that
+              runs entirely in your browser. There is no account, no backend
+              server, and no cloud database. Your food library, daily logs, and
+              recipes are stored locally on your device with Dexie on top of
+              IndexedDB.
             </p>
             <p>
-              The only external calls are deliberate and minimal: Open Food
-              Facts for barcode lookups, and Google Gemini for the AI features —
-              which use your own API key, so no shared infrastructure needs to be
-              paid for or provisioned.
+              The only external calls are deliberate and minimal: Open Food Facts
+              for barcode lookups, and Google Gemini for the AI features — which
+              use your own API key, so no shared infrastructure needs to be paid
+              for or provisioned.
             </p>
           </div>
-          <div className="mt-4 grid gap-3 sm:grid-cols-2">
+          <div className="grid gap-6 sm:grid-cols-2">
             <Card
               icon={Lock}
               title="Privacy"
@@ -101,48 +125,46 @@ export default function TechStackPage(): ReactElement {
               body="Export your whole library to JSON anytime. Nothing is locked into a proprietary cloud."
             />
           </div>
-        </section>
+        </Section>
 
-        <section className="space-y-3">
-          <h2 className="text-xl font-bold tracking-tight">The stack</h2>
-          <div className="grid gap-3 sm:grid-cols-2">
+        <Section title="The stack">
+          <div className="grid gap-6 sm:grid-cols-2">
             {STACK.map((item) => (
-              <div key={item.name} className="rounded-2xl bg-muted p-5">
-                <p className="text-xs font-semibold tracking-wide text-primary uppercase">
+              <div key={item.name} className="border-t-2 border-black p-4">
+                <p className="text-[0.6875rem] uppercase tracking-[0.13em] text-black/55">
                   {item.role}
                 </p>
-                <h3 className="mt-1 text-base font-bold">{item.name}</h3>
-                <p className="mt-1 text-sm leading-relaxed text-muted-foreground">
-                  {item.note}
-                </p>
+                <h3
+                  className={`mt-2 ${display} text-sm font-black uppercase tracking-[0.02em]`}
+                >
+                  {item.name}
+                </h3>
+                <p className="mt-2 text-xs leading-[1.8] text-black/55">{item.note}</p>
               </div>
             ))}
           </div>
-        </section>
+        </Section>
 
-        <section className="space-y-3">
-          <h2 className="text-xl font-bold tracking-tight">
-            Why it costs pennies to run
-          </h2>
-          <div className="space-y-3 text-sm leading-relaxed text-muted-foreground">
+        <Section title="Why it costs pennies to run">
+          <div className="space-y-4 text-black/55">
             <p>
-              Because there is no backend, there is nothing to provision,
-              scale, or secure on our side. The entire app is{" "}
-              <strong className="text-foreground">static files</strong> served
-              from a CDN — hosting that costs fractions of a cent per request and
+              Because there is no backend, there is nothing to provision, scale,
+              or secure on our side. The entire app is{" "}
+              <strong className="text-black">static files</strong> served from a
+              CDN — hosting that costs fractions of a cent per request and
               handles any amount of traffic automatically.
             </p>
             <p>
               The barcode database comes from{" "}
-              <strong className="text-foreground">Open Food Facts</strong>, which
-              is free and open. AI inference is paid for by the person using it,
+              <strong className="text-black">Open Food Facts</strong>, which is
+              free and open. AI inference is paid for by the person using it,
               through their own Gemini API key. That means the operating cost of
               this service is effectively the static hosting — cents a month —
               while delivering the core of what subscription health brands charge
               for.
-          </p>
+            </p>
           </div>
-          <div className="mt-4 grid gap-3 sm:grid-cols-2">
+          <div className="grid gap-6 sm:grid-cols-2">
             <Card
               icon={HandCoins}
               title="Cost-effective"
@@ -154,17 +176,16 @@ export default function TechStackPage(): ReactElement {
               body="Bring-your-own Gemini key means AI features cost you what you use — not a platform markup."
             />
           </div>
-        </section>
+        </Section>
 
-        <section className="space-y-3">
-          <h2 className="text-xl font-bold tracking-tight">The 80%</h2>
-          <p className="text-sm leading-relaxed text-muted-foreground">
+        <Section title="The 80%">
+          <p className="text-black/55">
             Scan a product, log your meals, track calories and macros by the
             gram, weigh home-cooked recipes, and ask AI about any restaurant
             order. That covers the day-to-day core of what big health apps do —
             minus the subscription, the ads, and the data harvesting.
           </p>
-        </section>
+        </Section>
       </div>
     </div>
   );

@@ -4,6 +4,7 @@ import { ChefHat, NotebookPen, ScanLine, Settings, UtensilsCrossed } from "lucid
 import { AppServicesProvider, useServices } from "@/di/AppServicesProvider";
 import { Toaster } from "@/components/ui/sonner";
 import { cn } from "@/lib/utils";
+import { isMobileUserAgent } from "@/lib/ua";
 import TodayPage from "@/views/TodayPage";
 import ScanPage from "@/views/ScanPage";
 import FoodsPage from "@/views/FoodsPage";
@@ -13,6 +14,9 @@ import CookPage from "@/views/CookPage";
 import CookRecipePage from "@/views/CookRecipePage";
 import LabelCapturePage from "@/views/LabelCapturePage";
 import AskPage from "@/views/AskPage";
+import LandingPage from "@/views/LandingPage";
+import LegalPage from "@/views/LegalPage";
+import TechStackPage from "@/views/TechStackPage";
 
 const NAV_ITEMS = [
   { path: "/", label: "Today", icon: NotebookPen },
@@ -82,11 +86,29 @@ function AppContent() {
   );
 }
 
+function Root() {
+  const [location] = useLocation();
+
+  if (location === "/legal") {
+    return <LegalPage />;
+  }
+
+  if (location === "/tech") {
+    return <TechStackPage />;
+  }
+
+  if (!isMobileUserAgent()) {
+    return <LandingPage />;
+  }
+
+  return <AppContent />;
+}
+
 export default function App() {
   return (
     <AppServicesProvider>
       <Toaster />
-      <AppContent />
+      <Root />
     </AppServicesProvider>
   );
 }

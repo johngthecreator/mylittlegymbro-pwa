@@ -28,8 +28,8 @@ export class ScannerService implements IScannerService {
         {
           fps: 15,
           qrbox: (vw, vh) => ({
-            width: Math.min(vw * 0.85, 340),
-            height: Math.min(vh * 0.28, 150),
+            width: Math.min(vw * 0.8, 480),
+            height: Math.min(vh * 0.3, 180),
           }),
         },
         (decodedText) => {

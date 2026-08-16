@@ -1,4 +1,4 @@
-export const APP_NAME = "Macrocalc";
+export const APP_NAME = "MyLittleGymBro";
 
 /** Fallback serving size used when OpenFoodFacts provides none. */
 export const DEFAULT_SERVING_SIZE = 100;

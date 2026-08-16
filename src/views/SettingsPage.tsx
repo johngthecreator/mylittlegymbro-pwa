@@ -187,6 +187,20 @@ export default function SettingsPage() {
           />
         </CardContent>
       </Card>
+
+      <p className="text-center text-xs text-muted-foreground">
+        <a href="/tech" className="underline-offset-2 hover:underline">
+          Tech stack
+        </a>
+        {" · "}
+        <a href="/legal#terms" className="underline-offset-2 hover:underline">
+          Terms
+        </a>
+        {" · "}
+        <a href="/legal#privacy" className="underline-offset-2 hover:underline">
+          Privacy
+        </a>
+      </p>
     </div>
   );
 }

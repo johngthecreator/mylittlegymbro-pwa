@@ -2,12 +2,75 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <link rel="apple-touch-icon" href="/logo.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-    <meta name="theme-color" content="#ffffff" />
+
+    <!-- Primary SEO -->
+    <title>mylittlegymbro — free, private macro tracker</title>
+    <meta
+      name="description"
+      content="Scan groceries, weigh your home-cooked meals, and ask AI about anything you eat. Free, private, per-gram macro tracking. No accounts, no ads, no cloud."
+    />
+    <meta
+      name="keywords"
+      content="macro tracker, calorie counter, nutrition, protein, carbs, fat, gym, fitness, myfitnesspal alternative, open food facts, gemini ai"
+    />
+    <meta name="author" content="MyLittleGymBro" />
+    <meta name="robots" content="index, follow" />
+    <meta name="application-name" content="MyLittleGymBro" />
+    <meta name="theme-color" content="#3100e0" />
+
+    <!-- Canonical — TODO: replace with your production URL -->
+    <link rel="canonical" href="https://mylittlegymbro.app/" />
+
+    <!-- Open Graph / social link cards (Facebook, Slack, iMessage, etc.) -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="MyLittleGymBro" />
+    <meta property="og:title" content="mylittlegymbro — free, private macro tracker" />
+    <meta
+      property="og:description"
+      content="Scan groceries, weigh your home-cooked meals, and ask AI about anything you eat. Per-gram macro tracking that doesn't suck."
+    />
+    <!-- TODO: replace with your production URL -->
+    <meta property="og:url" content="https://mylittlegymbro.app/" />
+    <meta property="og:image" content="https://mylittlegymbro.app/logo.png" />
+    <meta property="og:image:width" content="128" />
+    <meta property="og:image:height" content="128" />
+    <meta property="og:locale" content="en_US" />
+
+    <!-- Twitter / X card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="mylittlegymbro — free, private macro tracker" />
+    <meta
+      name="twitter:description"
+      content="Scan groceries, weigh your meals, ask AI about anything you eat. No accounts, no ads."
+    />
+    <meta name="twitter:image" content="https://mylittlegymbro.app/logo.png" />
+
+    <!-- PWA / mobile -->
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-    <title>Macrocalc</title>
+    <meta name="apple-mobile-web-app-title" content="MyLittleGymBro" />
+
+    <!-- Structured data -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "MyLittleGymBro",
+        "applicationCategory": "HealthApplication",
+        "operatingSystem": "Any",
+        "description": "Free, private macro tracker. Scan barcodes via Open Food Facts, weigh home-cooked meals for per-gram macros, and web-search any food with Gemini AI.",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "featureList": [
+          "Barcode scanning",
+          "Per-gram meal macros",
+          "AI food search",
+          "Offline-first"
+        ]
+      }
+    </script>
   </head>
   <body>
     <div id="root"></div>

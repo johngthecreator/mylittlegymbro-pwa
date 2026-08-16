@@ -70,7 +70,13 @@ export const ScannerView = forwardRef<ScannerViewHandle, ScannerViewProps>(
 
     return (
       <div className="scanner-viewfinder">
-        <div id={containerId} className="h-full w-full" />
+        <video
+          id={containerId}
+          className="h-full w-full object-cover"
+          muted
+          playsInline
+          autoPlay
+        />
 
         {running && (
           <>

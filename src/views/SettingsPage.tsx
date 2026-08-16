@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   DownloadIcon,
   Eye,
@@ -18,19 +18,32 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useServices } from "@/di/AppServicesProvider";
-import {
-  clearGeminiApiKey,
-  getGeminiApiKey,
-  setGeminiApiKey,
-} from "@/lib/settings";
+import { getGeminiApiKey } from "@/lib/settings";
 
 export default function SettingsPage() {
-  const { foodService, recipeService } = useServices();
+  const { aiService, foodService, recipeService } = useServices();
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [exporting, setExporting] = useState(false);
   const [importing, setImporting] = useState(false);
-  const [keyInput, setKeyInput] = useState(() => getGeminiApiKey() ?? "");
+  const [keyInput, setKeyInput] = useState("");
+  const [configured, setConfigured] = useState(false);
   const [showKey, setShowKey] = useState(false);
+
+  useEffect(() => {
+    let active = true;
+    aiService
+      .init()
+      .then(() => getGeminiApiKey())
+      .then((key) => {
+        if (!active) return;
+        setKeyInput(key ?? "");
+        setConfigured(Boolean(key));
+      })
+      .catch(() => {});
+    return () => {
+      active = false;
+    };
+  }, [aiService]);
 
   const handleExport = async () => {
     setExporting(true);
@@ -86,15 +99,16 @@ export default function SettingsPage() {
     }
   };
 
-  const handleSaveKey = () => {
-    setGeminiApiKey(keyInput.trim());
-    setKeyInput(getGeminiApiKey() ?? "");
+  const handleSaveKey = async () => {
+    await aiService.setApiKey(keyInput.trim());
+    setConfigured(true);
     toast.success("API key saved");
   };
 
-  const handleClearKey = () => {
-    clearGeminiApiKey();
+  const handleClearKey = async () => {
+    await aiService.clearApiKey();
     setKeyInput("");
+    setConfigured(false);
     toast.success("API key removed");
   };
 
@@ -109,8 +123,9 @@ export default function SettingsPage() {
         <CardHeader>
           <CardTitle>Gemini AI</CardTitle>
           <CardDescription>
-            Your key is stored only in this browser's localStorage. For safety,
-            restrict it to your app's domain in Google AI Studio.
+            Your key is stored in this browser's local database, alongside your
+            food data. For safety, restrict it to your app's domain in Google AI
+            Studio.
           </CardDescription>
         </CardHeader>
         <CardContent className="flex flex-col gap-3">
@@ -137,7 +152,7 @@ export default function SettingsPage() {
               </button>
             </div>
           </div>
-          {getGeminiApiKey() && (
+          {configured && (
             <p className="text-sm text-muted-foreground">Key configured.</p>
           )}
           <div className="flex gap-2">

@@ -94,7 +94,13 @@ export interface IRecipeService {
 // ---------------------------------------------------------------------------
 
 export interface IAiService {
-  /** True when a Gemini API key is configured in settings. */
+  /** Load the API key from storage into memory. Safe to call repeatedly. */
+  init(): Promise<void>;
+  /** Persist a new API key and update the in-memory copy. */
+  setApiKey(key: string): Promise<void>;
+  /** Remove the API key from storage and memory. */
+  clearApiKey(): Promise<void>;
+  /** True when an API key is configured (call after `init`). */
   hasApiKey(): boolean;
   /** Extract nutrition facts from a nutrition-label image. */
   parseNutritionLabel(

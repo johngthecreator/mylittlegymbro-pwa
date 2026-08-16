@@ -10,14 +10,14 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { formatNumber } from "@/lib/nutrition";
 import { useBarcodeLookup } from "@/controllers/useFoodController";
+import { useAiKey } from "@/controllers/useAiController";
 import { useAddLogEntry } from "@/controllers/useLogController";
-import { useServices } from "@/di/AppServicesProvider";
 
 type Phase = "idle" | "starting" | "scanning" | "processing" | "found" | "error";
 
 export default function ScanPage() {
   const [, navigate] = useLocation();
-  const { aiService } = useServices();
+  const { ready: aiReady, hasKey: aiHasKey } = useAiKey();
   const scannerRef = useRef<ScannerViewHandle>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const { food: foundFood, error, notFound, lookup, reset } = useBarcodeLookup();
@@ -181,7 +181,7 @@ export default function ScanPage() {
                 </Button>
               </div>
               {notFound &&
-                (aiService.hasApiKey() ? (
+                (aiReady && aiHasKey ? (
                   <Button
                     variant="secondary"
                     onClick={() => navigate(`/label?barcode=${encodeURIComponent(lastBarcode)}`)}

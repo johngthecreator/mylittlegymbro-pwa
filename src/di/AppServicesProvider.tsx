@@ -1,4 +1,4 @@
-import { createContext, useContext, useMemo } from "react";
+import { createContext, useContext, useEffect, useMemo } from "react";
 import type { ReactNode } from "react";
 import type {
   IAiService,
@@ -41,6 +41,10 @@ export function AppServicesProvider({ children }: { children: ReactNode }) {
       aiService: new AiService(),
     };
   }, []);
+
+  useEffect(() => {
+    void services.aiService.init();
+  }, [services]);
 
   return (
     <AppServicesContext.Provider value={services}>

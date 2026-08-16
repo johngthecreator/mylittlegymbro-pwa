@@ -4,6 +4,7 @@ import { useLocation } from "wouter";
 import { ArrowLeft, Camera, ImagePlus, LoaderCircle } from "lucide-react";
 import { toast } from "sonner";
 import { useServices } from "@/di/AppServicesProvider";
+import { useAiKey } from "@/controllers/useAiController";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -16,6 +17,7 @@ import {
 export default function LabelCapturePage() {
   const [location, navigate] = useLocation();
   const { aiService } = useServices();
+  const { ready, hasKey } = useAiKey();
   const [loading, setLoading] = useState(false);
   const cameraInputRef = useRef<HTMLInputElement>(null);
   const galleryInputRef = useRef<HTMLInputElement>(null);
@@ -54,7 +56,9 @@ export default function LabelCapturePage() {
     }
   };
 
-  if (!aiService.hasApiKey()) {
+  if (!ready) return null;
+
+  if (!hasKey) {
     return (
       <div className="mx-auto w-full max-w-md px-4 py-6 space-y-4">
         <h1 className="text-2xl font-bold">Photo the nutrition label</h1>

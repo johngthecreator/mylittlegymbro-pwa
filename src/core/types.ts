@@ -72,6 +72,12 @@ export interface MacroValues {
   fat: number;
 }
 
+/** A row in the app `settings` table (e.g. the Gemini API key). */
+export interface SettingEntry {
+  key: string;
+  value: string;
+}
+
 export interface RecipeIngredient {
   /** Reference to the library food, if any (undefined for quick-add raw ingredients). */
   foodId?: number;

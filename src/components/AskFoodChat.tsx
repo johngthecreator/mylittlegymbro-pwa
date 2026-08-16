@@ -5,6 +5,7 @@ import { LoaderCircle, LogInIcon, PlusIcon, RotateCcw, Send, Sparkles } from "lu
 import { toast } from "sonner";
 import type { FoodInput, FoodItem, FoodSearchResult } from "@/core/types";
 import { useServices } from "@/di/AppServicesProvider";
+import { useAiKey } from "@/controllers/useAiController";
 import { useAddLogEntry } from "@/controllers/useLogController";
 import { AmountDialog } from "@/components/AmountDialog";
 import { Badge } from "@/components/ui/badge";
@@ -131,8 +132,9 @@ function ResultCard(props: {
   );
 }
 
-export function AskFoodChat(): ReactElement {
+export function AskFoodChat(): ReactElement | null {
   const { aiService, foodService } = useServices();
+  const { ready, hasKey } = useAiKey();
   const [, navigate] = useLocation();
   const { adding, add } = useAddLogEntry();
 
@@ -253,7 +255,9 @@ export function AskFoodChat(): ReactElement {
     }
   };
 
-  if (!aiService.hasApiKey()) {
+  if (!ready) return null;
+
+  if (!hasKey) {
     return (
       <Card className="mt-4">
         <CardHeader>

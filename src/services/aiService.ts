@@ -1,7 +1,11 @@
 import { GoogleGenAI } from "@google/genai";
 import type { FoodInput, FoodSearchResult, FoodSearchSource } from "@/core/types";
 import type { IAiService } from "@/core/interfaces";
-import { getGeminiApiKey } from "@/lib/settings";
+import {
+  clearGeminiApiKey,
+  getGeminiApiKey,
+  setGeminiApiKey,
+} from "@/lib/settings";
 
 const MODEL = "gemini-2.5-flash";
 
@@ -37,16 +41,49 @@ function parseJsonObject(
 
 export class AiService implements IAiService {
   private client: GoogleGenAI | null = null;
+  private apiKey: string | null = null;
+  private loaded = false;
+
+  async init(): Promise<void> {
+    if (this.loaded) return;
+    this.apiKey = await getGeminiApiKey();
+    this.loaded = true;
+  }
+
+  async setApiKey(key: string): Promise<void> {
+    await setGeminiApiKey(key);
+    this.apiKey = key;
+    this.loaded = true;
+  }
+
+  async clearApiKey(): Promise<void> {
+    await clearGeminiApiKey();
+    this.apiKey = null;
+    this.loaded = true;
+  }
 
   hasApiKey(): boolean {
-    return Boolean(getGeminiApiKey());
+    return this.apiKey != null;
+  }
+
+  private async ensureLoaded(): Promise<void> {
+    if (!this.loaded) await this.init();
+  }
+
+  private async getClient(): Promise<GoogleGenAI> {
+    await this.ensureLoaded();
+    if (!this.client) {
+      if (!this.apiKey) throw new Error(NO_API_KEY_MESSAGE);
+      this.client = new GoogleGenAI({ apiKey: this.apiKey });
+    }
+    return this.client;
   }
 
   async parseNutritionLabel(
     image: { data: string; mimeType: string },
     barcode: string
   ): Promise<FoodInput> {
-    const ai = this.getClient();
+    const ai = await this.getClient();
     let text: string | undefined;
     try {
       const response = await ai.models.generateContent({
@@ -136,7 +173,7 @@ export class AiService implements IAiService {
   }
 
   async searchFood(query: string): Promise<FoodSearchResult> {
-    const ai = this.getClient();
+    const ai = await this.getClient();
     let text: string | undefined;
     let sources: FoodSearchSource[] | undefined;
     try {
@@ -216,14 +253,5 @@ Rules:
       fat,
       sources,
     };
-  }
-
-  private getClient(): GoogleGenAI {
-    if (!this.client) {
-      const apiKey = getGeminiApiKey();
-      if (!apiKey) throw new Error(NO_API_KEY_MESSAGE);
-      this.client = new GoogleGenAI({ apiKey });
-    }
-    return this.client;
   }
 }
